@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.edu"> 
+	<select id="findFoodById" resultType="com.ssafy.edu.dto.FoodDto" parameterType="java.lang.String">
+		select fidx, rnum, productGb, prdlstNm, allergy, kcal, 
+				fat, carbo, protein, tarnsfat, sugar, prdkind, imgurl1, imgurl2
+		from food
+		where rnum = #{seq}
+		order by fidx desc
+	</select>
+	
+	<select id="findFoodByName" resultType="com.ssafy.edu.dto.FoodDto" parameterType="java.lang.String">
+		select fidx, rnum, productGb, prdlstNm, allergy, kcal, 
+				fat, carbo, protein, tarnsfat, sugar, prdkind, imgurl1, imgurl2
+		from food
+		where prdlstNm like concat('%',#{name},'%')
+		order by fidx desc
+	</select>
+	<select id="findAllFood" resultType="com.ssafy.edu.dto.FoodDto">
+		select fidx, rnum, productGb, prdlstNm, allergy, kcal, 
+				fat, carbo, protein, tarnsfat, sugar, prdkind, imgurl1, imgurl2
+		from food
+		order by fidx desc
+	</select>
+	
+	<select id="getFood" parameterType="java.lang.String" resultType="com.ssafy.edu.dto.FoodDto">
+		select fidx, rnum, productGb, prdlstNm, allergy, kcal, 
+				fat, carbo, protein, tarnsfat, sugar, prdkind, imgurl1, imgurl2
+		from food
+		where rnum=#{rnum}
+	</select>
+
+</mapper>

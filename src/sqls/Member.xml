@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.edu">
+
+ 	<insert id="signUp" parameterType="com.ssafy.edu.dto.MemberDto">
+		INSERT INTO member(M_ID, M_PWD, M_NAME, M_LOCATION, M_PHONENUM)
+		VALUES(#{m_id}, #{m_pwd}, #{m_name}, #{m_location}, #{m_phonenum})
+	</insert>
+
+	<select id="logIn" parameterType="com.ssafy.edu.dto.MemberDto" resultType="com.ssafy.edu.dto.MemberDto">
+		SELECT M_ID, M_NAME, M_LOCATION,
+		M_PHONENUM FROM member
+		WHERE M_ID = #{m_id} AND M_PWD = #{m_pwd}
+	</select>
+
+
+
+
+	<select id="getName" parameterType="java.lang.String"
+		resultType="com.ssafy.edu.dto.MemberDto">
+		SELECT M_IDX, M_ID, M_PWD, M_NAME, M_LOCATION, M_PHONENUM
+		FROM MEMBER
+		WHERE M_ID=#{m_id}
+	</select>
+	
+	<update id="updateMember"
+		parameterType="com.ssafy.edu.dto.MemberDto">
+		UPDATE MEMBER SET
+		M_PWD=#{password} , M_LOCATION=
+		#{location}, M_PHONENUM=#{phonenum} WHERE
+		M_IDX=#{user_idx}
+	</update>
+	<update id="updateAllergy"
+		parameterType="com.ssafy.edu.dto.MemberDto">
+		UPDATE ALLERGY SET A_BUCKWHEAT=#{buckwheat},
+			A_WHEAT =#{wheat}, A_BEAN =	#{bean}, A_SELLFISH = #{sellfish}, A_MILK = #{milk} ,
+		A_PORK = #{pork}, A_EGGWHITE = #{eggwhite} , A_PEACH = #{peach} ,
+		A_BEEF = #{beef}, A_OYSTER = #{oyster} , A_TOMATO = #{tomato}
+		 WHERE A_ID= #{id}
+	</update>
+	
+	
+	   <select id="getID"
+   resultType="java.lang.Integer"
+   parameterType="com.ssafy.edu.dto.MemberDto">
+      SELECT ifnull(COUNT(*),0)
+      FROM MEMBER WHERE m_id=#{m_id}
+   </select>
+</mapper>
